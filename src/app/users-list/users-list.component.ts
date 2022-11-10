@@ -1,20 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
-export class User {
-  constructor(
-    public id: number,
-    public lastname: string,
-    public firstname: string,
-    public age: number,
-  ) {
-  }
-}
-
-const users: User[] = [
-  new User(0, 'Doe', 'John', 23),
-  new User(1, 'Doe', 'Jane', 32),
-];
-
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-users-list',
@@ -23,12 +9,14 @@ const users: User[] = [
 })
 export class UsersListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'lastname', 'firstname', 'age'];
-  dataSource = users;
+  dataSource = [];
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
   ngOnInit(): void {
+    const resquest: Observable<any> = this.http.get('http://localhost:3000/users', { observe: 'response' });
+    resquest.toPromise().then(response => this.dataSource = response.body);
 
   }
 
