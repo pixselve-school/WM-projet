@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiHelperService } from "../api-helper.service";
 
 @Component({
   selector: 'app-login',
@@ -7,13 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
   login(): void {
-    const email: string = (document.getElementById('username') as HTMLInputElement).value;
+    const username: string = (document.getElementById('username') as HTMLInputElement).value;
     const password: string = (document.getElementById('password') as HTMLInputElement).value;
-    console.log(email, password);
-
+    this.api.post({endpoint: '/auth/login', data: { username, password },}).then(response => console.log(response));
   }
 
-  constructor() {
+  constructor(private api: ApiHelperService) {
   }
 
   ngOnInit(): void {
