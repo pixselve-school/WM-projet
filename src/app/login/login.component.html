@@ -1,7 +1,21 @@
-<div>
-  <label for="username">Username</label>
-  <input type="text" id="username" placeholder="username" />
-  <label for="password">Password</label>
-  <input type="password" id="password" placeholder="password" />
-  <a (click)="login()"><button>Login</button></a>
+<div class="h-screen w-screen flex">
+  <mat-card class="max-w-5xl m-auto flex-grow">
+    <mat-card-title class="text-center">Login</mat-card-title>
+    <mat-card-content>
+      <form (submit)="login($event)" class="flex flex-col space-y-5">
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input [formControl]="username" matInput>
+          <mat-error *ngIf="username.getError('required')">Please enter a username</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input [formControl]="password" matInput type="password">
+          <mat-error *ngIf="password.getError('required')">Please enter a password</mat-error>
+        </mat-form-field>
+        <button [disabled]="username.invalid || password.invalid" color="primary" mat-flat-button type="submit">Login
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>
