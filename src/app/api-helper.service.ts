@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 const base_url: string = 'http://localhost:3000';
@@ -12,9 +12,9 @@ export class ApiHelperService {
   constructor(private http: HttpClient) { }
 
   public get({
-    endpoint,
-    queryParams = {},
-  }: {
+               endpoint,
+               queryParams = {},
+             }: {
     endpoint: string;
     queryParams?: any;
   }): Promise<any> {environment
@@ -22,10 +22,10 @@ export class ApiHelperService {
   }
 
   public post({
-    endpoint,
-    data = {},
-    queryParams = {},
-  }: {
+                endpoint,
+                data = {},
+                queryParams = {},
+              }: {
     endpoint: string;
     data?: any;
     queryParams?: any;
@@ -34,10 +34,10 @@ export class ApiHelperService {
   }
 
   public put({
-    endpoint,
-    data = {},
-    queryParams = {},
-  }: {
+               endpoint,
+               data = {},
+               queryParams = {},
+             }: {
     endpoint: string;
     data?: any;
     queryParams?: any;
@@ -46,10 +46,10 @@ export class ApiHelperService {
   }
 
   public delete({
-    endpoint,
-    data = {},
-    queryParams = {},
-  }: {
+                  endpoint,
+                  data = {},
+                  queryParams = {},
+                }: {
     endpoint: string;
     data?: any;
     queryParams?: any;
@@ -58,11 +58,11 @@ export class ApiHelperService {
   }
 
   public async request({
-    endpoint,
-    method = 'GET',
-    data = {},
-    queryParams = {},
-  }: {
+                         endpoint,
+                         method = 'GET',
+                         data = {},
+                         queryParams = {},
+                       }: {
     endpoint: string;
     method?: string;
     data?: object;
@@ -99,7 +99,7 @@ export class ApiHelperService {
       throw new Error(`error calling ${url} with method ${methodWanted}`);
     }
 
-    return await req.toPromise().then((res) => {
+    return await lastValueFrom(req).then((res) => {
       return res.body;
     });
   }
