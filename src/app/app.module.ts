@@ -15,6 +15,7 @@ import { MatInputModule } from "@angular/material/input";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { NgOptimizedImage } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgOptimizedImage
   ],
   providers: [
     {
