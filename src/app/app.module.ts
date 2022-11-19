@@ -16,13 +16,15 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { NgOptimizedImage } from "@angular/common";
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersListComponent,
     LoginComponent,
-    NavComponent
+    NavComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
