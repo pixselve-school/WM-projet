@@ -4,25 +4,25 @@ import { UsersListComponent } from "./users-list/users-list.component";
 import { LoginComponent } from "./login/login.component";
 import { AuthGuard } from "./guards/auth.guard";
 import { ProfileComponent } from "./profile/profile.component";
+import { LoggedLayoutComponent } from "./logged-layout/logged-layout.component";
 
 const routes: Routes = [
-  {
-    path: "users",
-    component: UsersListComponent,
-    canActivate: [AuthGuard]
-  },
   {
     path: "login",
     component: LoginComponent
   },
   {
     path: "",
-    redirectTo: "login",
-    pathMatch: "full"
-  },
-  {
-    path: "profile",
-    component: ProfileComponent,
+    component: LoggedLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: "profile", component: ProfileComponent },
+      { path: "", redirectTo: "profile", pathMatch: "full" },
+      {
+        path: "users",
+        component: UsersListComponent,
+      },
+    ]
   }
 ];
 
@@ -30,4 +30,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

@@ -17,6 +17,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { NgOptimizedImage } from "@angular/common";
 import { ProfileComponent } from './profile/profile.component';
+import { LoggedLayoutComponent } from './logged-layout/logged-layout.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProfileComponent } from './profile/profile.component';
     UsersListComponent,
     LoginComponent,
     NavComponent,
-    ProfileComponent
+    ProfileComponent,
+    LoggedLayoutComponent
   ],
   imports: [
     BrowserModule,
