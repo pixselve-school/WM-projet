@@ -1,27 +1,69 @@
 <app-nav></app-nav>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="p-10 space-y-10">
+  <h1 class="text-5xl font-bold">Users</h1>
 
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> id</th>
-    <td mat-cell *matCellDef="let user"> {{user.id}} </td>
-  </ng-container>
+  <div class="stats shadow w-full">
 
-  <ng-container matColumnDef="lastname">
-    <th mat-header-cell *matHeaderCellDef> Lastname</th>
-    <td mat-cell *matCellDef="let user"> {{user.lastname}} </td>
-  </ng-container>
+    <div class="stat">
+      <div class="stat-figure text-secondary">
+        <svg class="inline-block w-8 h-8 fill-current" viewBox="0 0 24 24">
+          <path
+            d="M19 10.73V19H17V11.36L15 12V19H13V12.62L11 13.26V19H9V13.89L7 14.5V19H5V15.15L2.57 15.92L2 14L5 13.05V5H7V12.42L9 11.79V5H11V11.16L13 10.53V5H15V9.9L17 9.26V5H19V8.63L21 8L21.57 9.92L19 10.73Z"/>
+        </svg>
+      </div>
+      <div class="stat-title">Count</div>
+      <div class="stat-value">{{dataSource.length}}</div>
+    </div>
 
-  <ng-container matColumnDef="firstname">
-    <th mat-header-cell *matHeaderCellDef> Firstname </th>
-    <td mat-cell *matCellDef="let user"> {{user.firstname}} </td>
-  </ng-container>
+    <div class="stat">
+      <div class="stat-figure text-secondary">
+        <svg class="inline-block w-8 h-8 stroke-current" fill="none" viewBox="0 0 24 24"
+             xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </div>
+      <div class="stat-title">Mean age</div>
+      <div class="stat-value">{{meanAge}}</div>
+    </div>
 
-  <ng-container matColumnDef="age">
-    <th mat-header-cell *matHeaderCellDef> Age </th>
-    <td mat-cell *matCellDef="let user"> {{user.age}} </td>
-  </ng-container>
+    <div class="stat">
+      <div class="stat-figure text-secondary">
+        <svg class="inline-block w-8 h-8 stroke-current" fill="none" viewBox="0 0 24 24"
+             xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
+                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </div>
+      <div class="stat-title">Age range</div>
+      <div class="stat-value">{{minAge}}-{{maxAge}}</div>
+    </div>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+  </div>
+
+
+  <div class="overflow-x-auto">
+    <table class="table w-full">
+      <!-- head -->
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of dataSource">
+        <th>{{user.id}}</th>
+        <td>{{user.firstname}}</td>
+        <td>{{user.lastname}}</td>
+        <td>{{user.age}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

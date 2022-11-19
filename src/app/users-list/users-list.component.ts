@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class UsersListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'lastname', 'firstname', 'age'];
-  dataSource = [];
+  dataSource: { id: string, lastname: string, firstname: string, age: string }[] = [];
 
   constructor(private http: HttpClient) {
   }
@@ -18,6 +18,18 @@ export class UsersListComponent implements OnInit {
     const resquest: Observable<any> = this.http.get('http://localhost:3000/users', { observe: 'response' });
     resquest.toPromise().then(response => this.dataSource = response.body);
 
+  }
+
+  get meanAge(): number {
+    return this.dataSource.reduce((acc, user) => acc + Number(user.age), 0) / this.dataSource.length;
+  }
+
+  get minAge(): number {
+    return this.dataSource.reduce((acc, user) => Math.min(acc, Number(user.age)), Number.MAX_SAFE_INTEGER);
+  }
+
+  get maxAge(): number {
+    return this.dataSource.reduce((acc, user) => Math.max(acc, Number(user.age)), 0);
   }
 
 }
