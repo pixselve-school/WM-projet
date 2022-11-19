@@ -1,3 +1,23 @@
-<nav>
-  <button (click)="logout()" *ngIf="isLogged">Logout</button>
-</nav>
+<div class="navbar bg-base-100">
+  <div class="flex-1">
+    <a class="btn btn-ghost normal-case text-xl" href="/">🐱KittenAsso's</a>
+  </div>
+  <div class="flex-none">
+
+    <div class="dropdown dropdown-end">
+      <label class="btn btn-ghost btn-circle avatar placeholder" tabindex="0">
+        <div class="bg-neutral-focus text-neutral-content rounded-full w-10">
+          <span class="text-xl">K</span>
+        </div>
+      </label>
+      <ul class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52" tabindex="0">
+        <li>
+          <a class="justify-between">Profile</a>
+        </li>
+        <li>
+          <button (click)="logout()">Logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
