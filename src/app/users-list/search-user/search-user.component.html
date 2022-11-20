@@ -20,7 +20,7 @@
                 stroke-linejoin="round"
                 stroke-width="2"/>
         </svg>
-        <span>Error! No user found for query {{searchQuery.value}}.</span>
+        <span>Error! No user found for query {{queryOnSearch}}.</span>
       </div>
     </div>
 
@@ -32,7 +32,7 @@
                 stroke-linejoin="round"
                 stroke-width="2"></path>
         </svg>
-        <span>We found {{result.firstname}} {{result.lastname}} for query {{result.id}}.</span>
+        <span>We found {{result.firstname}} {{result.lastname}} for query {{queryOnSearch}}.</span>
       </div>
       <div class="flex-none">
         <a [routerLink]="['/users', result.id]" class="btn btn-sm btn-primary" type="button">Details</a>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from "@angular/forms";
+import { ApiHelperService } from "../../api-helper.service";
 
 @Component({
   selector: 'app-search-user',
@@ -8,13 +9,13 @@ import { FormControl, Validators } from "@angular/forms";
 })
 export class SearchUserComponent implements OnInit {
   searchQuery = new FormControl("", [Validators.required]);
-
-  result: { firstname: string, lastname: string, id: string } | null | undefined = undefined;
+  queryOnSearch = "";
+  result: { firstname: string, lastname: string, id: number, age: number } | null | undefined = undefined;
 
 
   loading = false;
 
-  constructor() {
+  constructor(private api: ApiHelperService) {
   }
 
   ngOnInit(): void {
@@ -25,16 +26,10 @@ export class SearchUserComponent implements OnInit {
     event.preventDefault();
     try {
       this.loading = true;
-      // sleep for 2 seconds
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log(this.searchQuery.value);
-      this.result = {
-        firstname: "John",
-        lastname: "Doe",
-        id: "123"
-      };
+      this.queryOnSearch = this.searchQuery.value ?? "";
+      this.result = await this.api.get({ endpoint: `/users/${ this.searchQuery.value }` });
     } catch (e) {
-
+      this.result = null;
     } finally {
       this.loading = false;
     }
