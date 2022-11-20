@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { FormControl, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-users-list',
@@ -8,8 +9,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'lastname', 'firstname', 'age'];
   dataSource: { id: string, lastname: string, firstname: string, age: string }[] = [];
+
+  firstname = new FormControl("", [Validators.required]);
+  lastname = new FormControl("", [Validators.required]);
+  age = new FormControl("", [Validators.required]);
+  password = new FormControl("", [Validators.required]);
+
 
   constructor(private http: HttpClient) {
   }
