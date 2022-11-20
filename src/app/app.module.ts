@@ -19,6 +19,7 @@ import { NgOptimizedImage } from "@angular/common";
 import { ProfileComponent } from './profile/profile.component';
 import { LoggedLayoutComponent } from './logged-layout/logged-layout.component';
 import { SearchUserComponent } from './users-list/search-user/search-user.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SearchUserComponent } from './users-list/search-user/search-user.compon
     NavComponent,
     ProfileComponent,
     LoggedLayoutComponent,
-    SearchUserComponent
+    SearchUserComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
