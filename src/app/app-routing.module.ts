@@ -5,6 +5,7 @@ import { LoginComponent } from "./login/login.component";
 import { AuthGuard } from "./guards/auth.guard";
 import { ProfileComponent } from "./profile/profile.component";
 import { LoggedLayoutComponent } from "./logged-layout/logged-layout.component";
+import { UserDetailComponent } from "./user-detail/user-detail.component";
 
 const routes: Routes = [
   {
@@ -20,8 +21,12 @@ const routes: Routes = [
       { path: "", redirectTo: "users", pathMatch: "full" },
       {
         path: "users",
-        component: UsersListComponent,
+        component: UsersListComponent
       },
+      {
+        path: "users/:id",
+        component: UserDetailComponent
+      }
     ]
   }
 ];

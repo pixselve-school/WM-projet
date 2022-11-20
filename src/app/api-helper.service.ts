@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
-import { Observable, lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 const base_url: string = 'http://localhost:3000';
@@ -96,12 +96,10 @@ export class ApiHelperService {
     }
 
     if (!req) {
-      throw new Error(`error calling ${url} with method ${methodWanted}`);
+      throw new Error(`error calling ${ url } with method ${ methodWanted }`);
     }
-
-    return await lastValueFrom(req).then((res) => {
-      return res.body;
-    });
+    const res = await lastValueFrom(req);
+    return res.body;
   }
 }
 
