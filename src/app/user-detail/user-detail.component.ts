@@ -27,6 +27,7 @@ export class UserDetailComponent implements OnInit {
     // check if the id is valid
     try {
       this.user = await this.api.get({ endpoint: `/users/${this.id}` });
+      console.log(this.user);
     } catch (e) {
       // redirect to /users
       this.router.navigate(['/users']);
