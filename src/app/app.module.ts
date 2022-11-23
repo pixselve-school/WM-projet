@@ -5,17 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTableModule } from "@angular/material/table";
+import { MatTableModule } from '@angular/material/table';
 import { LoginComponent } from './login/login.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
-import { TokenHttpInterceptor } from "./interceptors/token.interceptor";
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { TokenHttpInterceptor } from './interceptors/token.interceptor';
 import { NavComponent } from './nav/nav.component';
-import { MatCardModule } from "@angular/material/card";
-import { MatInputModule } from "@angular/material/input";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatButtonModule } from "@angular/material/button";
-import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { NgOptimizedImage } from "@angular/common";
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NgOptimizedImage } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
 import { LoggedLayoutComponent } from './logged-layout/logged-layout.component';
 import { SearchUserComponent } from './users-list/search-user/search-user.component';
@@ -30,7 +30,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     ProfileComponent,
     LoggedLayoutComponent,
     SearchUserComponent,
-    UserDetailComponent
+    UserDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +44,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     MatButtonModule,
     MatSnackBarModule,
     NgOptimizedImage,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     {
@@ -52,9 +52,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
       useClass: TokenHttpInterceptor,
       multi: true,
     },
-
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

@@ -6,7 +6,7 @@ const IS_LOGGED_IN = 'isLoggedIn';
 const IS_LOGGED = 'true';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenStorageService {
   public clear(): void {
@@ -27,6 +27,6 @@ export class TokenStorageService {
   }
 
   public isLogged(): boolean {
-    return (Boolean)(localStorage.getItem(IS_LOGGED_IN));
+    return Boolean(localStorage.getItem(IS_LOGGED_IN));
   }
 }

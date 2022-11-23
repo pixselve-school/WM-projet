@@ -1,29 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { ApiHelperService } from "../api-helper.service";
+import { ActivatedRoute, Router } from '@angular/router';
+import { ApiHelperService } from '../api-helper.service';
 
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
-  styleUrls: ['./user-detail.component.css']
+  styleUrls: ['./user-detail.component.css'],
 })
 export class UserDetailComponent implements OnInit {
-  id: string = this.route.snapshot.paramMap.get('id') ?? "";
+  id: string = this.route.snapshot.paramMap.get('id') ?? '';
   deleteLoading: boolean = false;
-  user: { firstname: string; lastname: string; id: number; age: number; } = {
-    firstname: "",
-    lastname: "",
+  user: { firstname: string; lastname: string; id: number; age: number } = {
+    firstname: '',
+    lastname: '',
     id: 0,
-    age: 0
+    age: 0,
   };
 
-  constructor(private route: ActivatedRoute, private api: ApiHelperService, private router: Router) {
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private api: ApiHelperService,
+    private router: Router
+  ) {}
 
   async ngOnInit(): Promise<void> {
     // check if the id is valid
     try {
-      this.user = await this.api.get({ endpoint: `/users/${ this.id }` });
+      this.user = await this.api.get({ endpoint: `/users/${this.id}` });
     } catch (e) {
       // redirect to /users
       this.router.navigate(['/users']);
@@ -36,7 +39,7 @@ export class UserDetailComponent implements OnInit {
   async deleteUser(): Promise<void> {
     try {
       this.deleteLoading = true;
-      await this.api.delete({ endpoint: `/users/${ this.id }` });
+      await this.api.delete({ endpoint: `/users/${this.id}` });
       this.router.navigate(['/users']);
     } catch (e) {
       console.log(e);
@@ -44,5 +47,4 @@ export class UserDetailComponent implements OnInit {
       this.deleteLoading = false;
     }
   }
-
 }

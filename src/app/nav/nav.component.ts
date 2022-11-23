@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from "../services/token-storage.service";
-import { Router } from "@angular/router";
+import { TokenStorageService } from '../services/token-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+  styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
   isLogged = false;
 
-  constructor(private tokenStorageService: TokenStorageService, private router: Router) {
-  }
+  constructor(
+    private tokenStorageService: TokenStorageService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.isLogged = this.tokenStorageService.isLogged();
@@ -19,8 +21,6 @@ export class NavComponent implements OnInit {
 
   logout(): void {
     this.tokenStorageService.clear();
-    this.router.navigateByUrl("/login");
+    this.router.navigateByUrl('/login');
   }
-
-
 }

@@ -9,23 +9,24 @@ const base_url: string = 'http://localhost:3000';
   providedIn: 'root',
 })
 export class ApiHelperService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public get({
-               endpoint,
-               queryParams = {},
-             }: {
+    endpoint,
+    queryParams = {},
+  }: {
     endpoint: string;
     queryParams?: any;
-  }): Promise<any> {environment
+  }): Promise<any> {
+    environment;
     return this.request({ endpoint, method: 'GET', queryParams });
   }
 
   public post({
-                endpoint,
-                data = {},
-                queryParams = {},
-              }: {
+    endpoint,
+    data = {},
+    queryParams = {},
+  }: {
     endpoint: string;
     data?: any;
     queryParams?: any;
@@ -34,10 +35,10 @@ export class ApiHelperService {
   }
 
   public put({
-               endpoint,
-               data = {},
-               queryParams = {},
-             }: {
+    endpoint,
+    data = {},
+    queryParams = {},
+  }: {
     endpoint: string;
     data?: any;
     queryParams?: any;
@@ -46,10 +47,10 @@ export class ApiHelperService {
   }
 
   public delete({
-                  endpoint,
-                  data = {},
-                  queryParams = {},
-                }: {
+    endpoint,
+    data = {},
+    queryParams = {},
+  }: {
     endpoint: string;
     data?: any;
     queryParams?: any;
@@ -58,11 +59,11 @@ export class ApiHelperService {
   }
 
   public async request({
-                         endpoint,
-                         method = 'GET',
-                         data = {},
-                         queryParams = {},
-                       }: {
+    endpoint,
+    method = 'GET',
+    data = {},
+    queryParams = {},
+  }: {
     endpoint: string;
     method?: string;
     data?: object;
@@ -76,7 +77,12 @@ export class ApiHelperService {
       params: queryParams,
     };
 
-    console.log(method, url, JSON.stringify(requestOptions), JSON.stringify(data));
+    console.log(
+      method,
+      url,
+      JSON.stringify(requestOptions),
+      JSON.stringify(data)
+    );
 
     let req: Observable<any>;
     if (methodWanted === 'get') {
@@ -96,10 +102,9 @@ export class ApiHelperService {
     }
 
     if (!req) {
-      throw new Error(`error calling ${ url } with method ${ methodWanted }`);
+      throw new Error(`error calling ${url} with method ${methodWanted}`);
     }
     const res = await lastValueFrom(req);
     return res.body;
   }
 }
-

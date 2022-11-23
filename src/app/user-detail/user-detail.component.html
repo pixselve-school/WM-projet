@@ -1,29 +1,36 @@
 <div class="p-10 space-y-10">
   <div class="flex items-center space-x-2">
-    <h1 class="text-5xl font-bold">{{user.firstname}} {{user.lastname}} ({{user.age}})</h1>
+    <h1 class="text-5xl font-bold">
+      {{ user.firstname }} {{ user.lastname }} ({{ user.age }})
+    </h1>
 
     <!-- The button to open modal -->
     <label class="btn" for="my-modal">
       <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24">
         <path
-          d="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z"/>
+          d="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z"
+        />
       </svg>
     </label>
   </div>
-
-
 </div>
 
-
 <!-- Put this part before </body> tag -->
-<input class="modal-toggle" id="my-modal" type="checkbox"/>
+<input class="modal-toggle" id="my-modal" type="checkbox" />
 <div class="modal">
   <div class="modal-box bg-error">
     <h3 class="font-bold text-lg">⚠️ DANGER ZONE</h3>
-    <p class="py-4">Do you want to delete {{user.firstname}} {{user.lastname}} ?</p>
+    <p class="py-4">
+      Do you want to delete {{ user.firstname }} {{ user.lastname }} ?
+    </p>
     <div class="modal-action">
-      <button (click)="deleteUser()" [ngClass]="{'loading': deleteLoading}" class="btn btn-ghost"><span
-        *ngIf="!deleteLoading">Yes</span></button>
+      <button
+        (click)="deleteUser()"
+        [ngClass]="{ loading: deleteLoading }"
+        class="btn btn-ghost"
+      >
+        <span *ngIf="!deleteLoading">Yes</span>
+      </button>
       <label class="btn btn-primary" for="my-modal">Of course not !</label>
     </div>
   </div>
