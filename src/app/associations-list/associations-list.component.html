@@ -1,1 +1,174 @@
-<p>associations-list works!</p>
+<div class="p-10 space-y-10">
+  <h1 class="text-5xl font-bold">Associations</h1>
+
+  <div class="overflow-x-auto">
+    <table class="table w-full">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Members</th>
+          <th>
+            <label class="btn btn-sm" for="new-association-modal"
+              >New association</label
+            >
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let association of associations">
+          <th>{{ association.name }}</th>
+          <th>
+            <div class="avatar-group -space-x-6">
+              <div
+                *ngIf="association.members.length === 0"
+                class="flex items-center space-x-2"
+              >
+                <div class="avatar">
+                  <div class="w-12">
+                    <img
+                      alt="lost"
+                      class="object-cover"
+                      src="https://media.tenor.com/5R1whvx7pOkAAAAC/lost-johntravolta.gif"
+                    />
+                  </div>
+                </div>
+
+                <div>No members yet...</div>
+              </div>
+
+              <div
+                *ngFor="let member of association.members.slice(0, 3)"
+                class="avatar placeholder"
+              >
+                <div class="w-12 bg-neutral-focus text-neutral-content">
+                  <span
+                    >{{ member.firstname.charAt(0)
+                    }}{{ member.lastname.charAt(0) }}</span
+                  >
+                </div>
+              </div>
+
+              <div
+                *ngIf="association.members.length > 3"
+                class="avatar placeholder"
+              >
+                <div class="w-12 bg-neutral-focus text-neutral-content">
+                  <span>+{{ association.members.length - 3 }}</span>
+                </div>
+              </div>
+            </div>
+          </th>
+          <th>
+            <a
+              [routerLink]="['/associations', association.id]"
+              class="btn btn-ghost btn-xs"
+              >details</a
+            >
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<input
+  [(ngModel)]="modalOpen"
+  class="modal-toggle"
+  id="new-association-modal"
+  type="checkbox"
+/>
+<div class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Create an association</h3>
+
+    <form (submit)="addAssociation($event)" class="space-y-4">
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Name</span>
+        </label>
+        <input
+          class="input input-bordered"
+          formControlName="name"
+          placeholder="Cody's great association"
+          required
+          type="text"
+        />
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="table table-compact w-full">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <button class="btn btn-circle btn-xs">
+                  <svg
+                    class="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6 18L18 6M6 6l12 12"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    />
+                  </svg>
+                </button>
+              </td>
+              <td>Cy Ganderton</td>
+              <td>
+                <input
+                  class="input input-bordered input-xs w-full max-w-xs"
+                  type="text"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!--      <div-->
+      <!--        *ngIf="errorCreate.length > 0"-->
+      <!--        class="alert alert-error shadow-lg my-2"-->
+      <!--      >-->
+      <!--        <div>-->
+      <!--          <svg-->
+      <!--            class="stroke-current flex-shrink-0 h-6 w-6"-->
+      <!--            fill="none"-->
+      <!--            viewBox="0 0 24 24"-->
+      <!--            xmlns="http://www.w3.org/2000/svg"-->
+      <!--          >-->
+      <!--            <path-->
+      <!--              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"-->
+      <!--              stroke-linecap="round"-->
+      <!--              stroke-linejoin="round"-->
+      <!--              stroke-width="2"-->
+      <!--            />-->
+      <!--          </svg>-->
+      <!--          <span>{{ errorCreate }}</span>-->
+      <!--        </div>-->
+      <!--      </div>-->
+
+      <div class="modal-action">
+        <label class="btn" for="new-association-modal">Cancel</label>
+        <button
+          [disabled]="formGroup.invalid"
+          [ngClass]="{ loading: loadingCreate }"
+          class="btn btn-primary"
+        >
+          Create
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
