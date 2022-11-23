@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 export type Association = {
+  id: number;
   name: string;
   members: AssociationMember[];
 };
@@ -16,21 +19,9 @@ export type AssociationMember = {
   providedIn: 'root',
 })
 export class AssociationsService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getAssociations(): Association[] {
-    return [
-      {
-        name: 'Association 1',
-        members: [
-          {
-            lastname: 'Doe',
-            firstname: 'John',
-            age: 42,
-            role: 'president',
-          },
-        ],
-      },
-    ];
+  getAssociations(): Observable<Association[]> {
+    return this.http.get<Association[]>('http://localhost:3000/associations');
   }
 }
