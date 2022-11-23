@@ -12,7 +12,7 @@ import { TokenHttpInterceptor } from "./interceptors/token.interceptor";
 import { NavComponent } from './nav/nav.component';
 import { MatCardModule } from "@angular/material/card";
 import { MatInputModule } from "@angular/material/input";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { NgOptimizedImage } from "@angular/common";
@@ -43,7 +43,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     ReactiveFormsModule,
     MatButtonModule,
     MatSnackBarModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    FormsModule
   ],
   providers: [
     {
