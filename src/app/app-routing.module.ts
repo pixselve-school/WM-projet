@@ -6,6 +6,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { LoggedLayoutComponent } from './logged-layout/logged-layout.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { AssociationsListComponent } from './associations-list/associations-list.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'users/:id',
         component: UserDetailComponent,
+      },
+      {
+        path: 'associations',
+        component: AssociationsListComponent,
       },
     ],
   },
