@@ -7,6 +7,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { LoggedLayoutComponent } from './logged-layout/logged-layout.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { AssociationsListComponent } from './associations-list/associations-list.component';
+import { AssociationDetailComponent } from './association-detail/association-detail.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'associations',
         component: AssociationsListComponent,
+      },
+      {
+        path: 'associations/:id',
+        component: AssociationDetailComponent,
       },
     ],
   },
