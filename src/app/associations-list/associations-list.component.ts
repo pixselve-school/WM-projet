@@ -20,8 +20,18 @@ export class AssociationsListComponent implements OnInit {
   }
 
   getAssociations(): void {
+    console.log(this.associationsService);
     this.associationsService.getAssociations().subscribe((associations) => {
       this.associations = associations;
     });
+  }
+
+  async findAssociation(id: string): Promise<{ text: string; link: string }> {
+    console.log(this.associationsService);
+    const association = await this.associationsService
+      .getAssociation(+id)
+      .toPromise();
+    if (association === undefined) throw new Error('Association not found');
+    return { text: association.name, link: `/associations/${id}` };
   }
 }

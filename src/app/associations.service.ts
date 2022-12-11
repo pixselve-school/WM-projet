@@ -39,4 +39,10 @@ export class AssociationsService {
       association
     );
   }
+
+  getAssociation(id: number): Observable<Association> {
+    return this.http.get<Association>(
+      `${environment.backendUrl}/associations/${id}`
+    );
+  }
 }

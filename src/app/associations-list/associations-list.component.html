@@ -1,15 +1,20 @@
 <div class="p-10 space-y-10">
   <h1 class="text-5xl font-bold">Associations</h1>
 
+  <div>
+    <app-search-association [search]="findAssociation"></app-search-association>
+  </div>
+
+
   <div class="overflow-x-auto">
     <table class="table w-full">
       <!-- head -->
       <thead>
-        <tr>
-          <th>Name</th>
-          <th>Members</th>
-          <th>
-            <label class="btn btn-sm" for="new-association-modal"
+      <tr>
+        <th>Name</th>
+        <th>Members</th>
+        <th>
+          <label class="btn btn-sm" for="new-association-modal"
               >New association</label
             >
           </th>
