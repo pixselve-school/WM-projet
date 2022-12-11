@@ -21,6 +21,7 @@ import { LoggedLayoutComponent } from './logged-layout/logged-layout.component';
 import { SearchUserComponent } from './users-list/search-user/search-user.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { AssociationsListComponent } from './associations-list/associations-list.component';
+import { NewAssociationDialogComponent } from './associations-list/new-association-dialog/new-association-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AssociationsListComponent } from './associations-list/associations-list
     SearchUserComponent,
     UserDetailComponent,
     AssociationsListComponent,
+    NewAssociationDialogComponent,
   ],
   imports: [
     BrowserModule,

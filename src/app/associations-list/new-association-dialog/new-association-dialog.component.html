@@ -1,0 +1,235 @@
+<input
+  [(ngModel)]="modalOpen"
+  class="modal-toggle"
+  id="new-association-modal"
+  type="checkbox"
+/>
+<div class="modal">
+  <div class="modal-box space-y-4">
+    <h3 class="font-bold text-lg">Create an association</h3>
+
+    <ul class="steps w-full">
+      <li [ngClass]="{ 'step-primary': step >= 0 }" class="step">Basics</li>
+      <li [ngClass]="{ 'step-primary': step >= 1 }" class="step">Roles</li>
+      <li [ngClass]="{ 'step-primary': step >= 2 }" class="step">Users</li>
+      <li [ngClass]="{ 'step-primary': step >= 3 }" class="step">Recap</li>
+    </ul>
+
+    <div *ngIf="step === 0">
+      <form
+        (submit)="finishBasics($event)"
+        [formGroup]="associationBasicsForm"
+        class="space-y-4"
+      >
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Name</span>
+          </label>
+          <input
+            class="input input-bordered"
+            formControlName="name"
+            placeholder="Cody's great association"
+            required
+            type="text"
+          />
+        </div>
+        <div class="modal-action">
+          <label class="btn" for="new-association-modal">Cancel</label>
+          <button
+            [disabled]="associationBasicsForm.invalid"
+            [ngClass]="{ loading: loadingCreate }"
+            class="btn btn-primary"
+            type="submit"
+          >
+            Next
+          </button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="step === 1">
+      <form
+        (submit)="finishRoles($event)"
+        [formGroup]="associationRolesForm"
+        class="space-y-4"
+      >
+        <div class="flex items-end space-x-2">
+          <div class="form-control flex-grow">
+            <label class="label">
+              <span class="label-text">Role name</span>
+            </label>
+            <input
+              class="input input-bordered"
+              formControlName="roleName"
+              placeholder="Cody's great association"
+              required
+              type="text"
+            />
+          </div>
+          <button
+            (click)="addRole()"
+            [disabled]="associationRolesForm.get('roleName')?.invalid"
+            class="btn"
+            type="button"
+          >
+            Add
+          </button>
+        </div>
+
+        <div>
+          <div
+            *ngFor="
+              let role of associationRolesForm.get('roles')?.value;
+              index as i
+            "
+            class="badge badge-info gap-2"
+          >
+            <button (click)="removeRole(i)" type="button">
+              <svg
+                class="inline-block w-4 h-4 stroke-current"
+                fill="none"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 18L18 6M6 6l12 12"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></path>
+              </svg>
+            </button>
+            {{ role }}
+          </div>
+        </div>
+        <div class="modal-action">
+          <label class="btn" for="new-association-modal">Cancel</label>
+          <button
+            [disabled]="associationRolesForm.get('roles')?.invalid"
+            [ngClass]="{ loading: loadingCreate }"
+            class="btn btn-primary"
+            type="submit"
+          >
+            Next
+          </button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="step === 2" class="space-y-4">
+      <form (submit)="addMember($event)">
+        <div class="flex items-end space-x-2">
+          <div class="form-control flex-grow">
+            <input
+              [formControl]="addMemberInput"
+              [ngClass]="{ 'input-error': invalidMemberID }"
+              class="input input-bordered input-xs"
+              placeholder="Member ID"
+              required
+              type="text"
+            />
+          </div>
+          <button
+            [disabled]="addMemberInput.invalid"
+            class="btn btn-xs"
+            type="submit"
+          >
+            Add
+          </button>
+        </div>
+      </form>
+      <div class="overflow-x-auto">
+        <table class="table table-compact w-full">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let member of membersToUsers.controls; let i = index">
+              <ng-container [formGroup]="member">
+                <td>
+                  <button
+                    (click)="removeMember(i)"
+                    class="btn btn-circle btn-xs"
+                  >
+                    <svg
+                      class="h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6 18L18 6M6 6l12 12"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  </button>
+                </td>
+                <td>{{ member.value.name }}</td>
+                <td>
+                  <select
+                    class="select select-bordered select-xs w-full max-w-xs"
+                    formControlName="role"
+                  >
+                    <option disabled selected>Member</option>
+                    <option
+                      *ngFor="
+                        let role of associationRolesForm.get('roles')?.value
+                      "
+                    >
+                      {{ role }}
+                    </option>
+                  </select>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-action">
+        <label class="btn" for="new-association-modal">Cancel</label>
+        <button (click)="finishMembers()" class="btn btn-primary">Next</button>
+      </div>
+    </div>
+    <div *ngIf="step === 3">
+      <div>
+        <h1>{{ associationBasicsForm.controls.name.value }}</h1>
+
+        <div class="overflow-x-auto">
+          <table class="table table-compact w-full">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let member of membersToUsers.controls; let i = index">
+                <td>{{ member.value.name }}</td>
+                <td>
+                  <div class="badge badge-primary">{{ member.value.role }}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-action">
+        <label class="btn" for="new-association-modal">Cancel</label>
+        <button
+          (click)="addAssociation()"
+          [ngClass]="{ loading: loadingCreate }"
+          class="btn btn-primary"
+          type="submit"
+        >
+          Finish
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

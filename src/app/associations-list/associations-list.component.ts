@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Association, AssociationsService } from '../associations.service';
-import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-associations-list',
@@ -9,11 +8,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class AssociationsListComponent implements OnInit {
   associations: Association[] = [];
-  modalOpen = true;
-  loadingCreate = false;
-  formGroup = new FormGroup({
-    name: new FormControl(''),
-  });
 
   constructor(private readonly associationsService: AssociationsService) {}
 
@@ -21,11 +15,13 @@ export class AssociationsListComponent implements OnInit {
     this.getAssociations();
   }
 
+  addAssociation(association: Association): void {
+    this.associations.push(association);
+  }
+
   getAssociations(): void {
     this.associationsService.getAssociations().subscribe((associations) => {
       this.associations = associations;
     });
   }
-
-  async addAssociation(event: SubmitEvent): Promise<void> {}
 }
