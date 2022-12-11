@@ -10,11 +10,18 @@ import { ApiHelperService } from '../api-helper.service';
 export class UserDetailComponent implements OnInit {
   id: string = this.route.snapshot.paramMap.get('id') ?? '';
   deleteLoading: boolean = false;
-  user: { firstname: string; lastname: string; id: number; age: number } = {
+  user: {
+    firstname: string;
+    lastname: string;
+    id: number;
+    age: number;
+    associations: any[];
+  } = {
     firstname: '',
     lastname: '',
     id: 0,
     age: 0,
+    associations: [],
   };
 
   constructor(

@@ -14,23 +14,12 @@
     </label>
   </div>
 
-
-  <div class="grid grid-cols-4">
-    <div class="card w-96 bg-base-100 shadow-xl">
-      <figure class="overflow-hidden h-[200px] w-full object-fill">
-        <img alt="Shoes" priority src="https://cataas.com/cat"/>
-      </figure>
-      <div class="card-body">
-        <h2 class="card-title">Shoes!</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
-        <div class="card-actions justify-end">
-          <button class="btn btn-primary">Buy Now</button>
-        </div>
-      </div>
-    </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+    <app-association-card
+      *ngFor="let association of user.associations"
+      [association]="association"
+    ></app-association-card>
   </div>
-
-
 </div>
 
 <!-- Put this part before </body> tag -->

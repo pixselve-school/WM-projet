@@ -22,6 +22,7 @@ import { SearchUserComponent } from './users-list/search-user/search-user.compon
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { AssociationsListComponent } from './associations-list/associations-list.component';
 import { NewAssociationDialogComponent } from './associations-list/new-association-dialog/new-association-dialog.component';
+import { AssociationCardComponent } from './user-detail/association-card/association-card.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { NewAssociationDialogComponent } from './associations-list/new-associati
     UserDetailComponent,
     AssociationsListComponent,
     NewAssociationDialogComponent,
+    AssociationCardComponent,
   ],
   imports: [
     BrowserModule,

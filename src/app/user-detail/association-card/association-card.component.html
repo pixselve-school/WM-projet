@@ -1,0 +1,24 @@
+<div class="card w-96 bg-base-100 shadow-xl">
+  <figure class="overflow-hidden h-[200px] w-full object-fill">
+    <img
+      [src]="'https://cataas.com/cat/says/' + association.name"
+      alt="Shoes"
+      priority
+    />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title">{{ association.name }}</h2>
+    <div class="stat">
+      <div class="stat-title">Total Member Count</div>
+      <div class="stat-value">{{ association.users.length }}</div>
+      <div class="stat-desc">{{ memberCountTagLine }}</div>
+    </div>
+    <div class="card-actions justify-end">
+      <a
+        [routerLink]="['/associations', association.id]"
+        class="btn btn-primary"
+        >Details</a
+      >
+    </div>
+  </div>
+</div>
