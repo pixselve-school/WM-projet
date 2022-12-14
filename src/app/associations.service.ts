@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
+import { Role } from './roles.service';
 
 export type Association = {
   id: number;
@@ -49,6 +50,12 @@ export class AssociationsService {
   deleteAssociation(id: number): Observable<Association> {
     return this.http.delete<Association>(
       `${environment.backendUrl}/associations/${id}`
+    );
+  }
+
+  getRoles(id: number): Observable<Role[]> {
+    return this.http.get<Role[]>(
+      `${environment.backendUrl}/associations/${id}/roles`
     );
   }
 }

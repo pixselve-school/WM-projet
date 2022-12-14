@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Association, AssociationsService } from '../associations.service';
+import { Role } from '../roles.service';
 
 @Component({
   selector: 'app-association-detail',
@@ -9,6 +10,7 @@ import { Association, AssociationsService } from '../associations.service';
 })
 export class AssociationDetailComponent implements OnInit {
   association!: Association;
+  roles!: Role[];
   id: string = this.route.snapshot.paramMap.get('id') ?? '';
 
   loadingDelete = false;
@@ -24,8 +26,16 @@ export class AssociationDetailComponent implements OnInit {
       const association = await this.associationService
         .getAssociation(parseInt(this.id))
         .toPromise();
+
+      const roles = await this.associationService
+        .getRoles(parseInt(this.id))
+        .toPromise();
+
       if (association === undefined) throw new Error('Association not found');
+      if (roles === undefined) throw new Error('Roles not found');
+
       this.association = association;
+      this.roles = roles;
     } catch (e) {
       this.router.navigate(['/associations']);
     }
