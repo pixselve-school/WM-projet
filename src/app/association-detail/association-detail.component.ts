@@ -11,6 +11,8 @@ export class AssociationDetailComponent implements OnInit {
   association!: Association;
   id: string = this.route.snapshot.paramMap.get('id') ?? '';
 
+  loadingDelete = false;
+
   constructor(
     private route: ActivatedRoute,
     private associationService: AssociationsService,
@@ -26,6 +28,20 @@ export class AssociationDetailComponent implements OnInit {
       this.association = association;
     } catch (e) {
       this.router.navigate(['/associations']);
+    }
+  }
+
+  async deleteAssociation(): Promise<void> {
+    try {
+      this.loadingDelete = true;
+      await this.associationService
+        .deleteAssociation(parseInt(this.id))
+        .toPromise();
+      this.router.navigate(['/associations']);
+    } catch (e) {
+      alert('Error deleting association');
+    } finally {
+      this.loadingDelete = false;
     }
   }
 }

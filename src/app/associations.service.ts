@@ -45,4 +45,10 @@ export class AssociationsService {
       `${environment.backendUrl}/associations/${id}`
     );
   }
+
+  deleteAssociation(id: number): Observable<Association> {
+    return this.http.delete<Association>(
+      `${environment.backendUrl}/associations/${id}`
+    );
+  }
 }
