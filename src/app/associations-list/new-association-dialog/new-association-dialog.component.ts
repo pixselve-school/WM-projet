@@ -28,8 +28,10 @@ export class NewAssociationDialogComponent implements OnInit {
   });
   associationRolesForm = this.fb.group({
     roles: this.fb.array([]),
-    roleName: ['', Validators.required],
   });
+
+  associationName = this.fb.control('', Validators.required);
+
   addMemberInput = this.fb.control('', Validators.required);
   membersToUsers = this.fb.array<FormGroup>([]);
 
@@ -44,6 +46,7 @@ export class NewAssociationDialogComponent implements OnInit {
     this.associationBasicsForm.reset();
     this.associationRolesForm.reset();
     this.membersToUsers.reset();
+    this.associationName.reset();
     this.step = FormStep.Basics;
   }
 
@@ -93,11 +96,12 @@ export class NewAssociationDialogComponent implements OnInit {
     this.step = FormStep.Roles;
   }
 
-  addRole(): void {
+  addRole(event: SubmitEvent): void {
+    event.preventDefault();
     this.associationRolesForm
       .get('roles')
-      ?.value.push(this.associationRolesForm.get('roleName')?.value);
-    this.associationRolesForm.get('roleName')?.reset();
+      ?.value.push(this.associationName.value);
+    this.associationName.reset();
   }
 
   removeRole(index: number): void {

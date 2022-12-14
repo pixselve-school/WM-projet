@@ -53,23 +53,22 @@
         class="space-y-4"
       >
         <div class="flex items-end space-x-2">
-          <div class="form-control flex-grow">
+          <form (submit)="addRole($event)" class="form-control flex-grow">
             <label class="label">
               <span class="label-text">Role name</span>
             </label>
             <input
               class="input input-bordered"
-              formControlName="roleName"
+              [formControl]="associationName"
               placeholder="Cody's great association"
               required
               type="text"
             />
-          </div>
+          </form>
           <button
-            (click)="addRole()"
-            [disabled]="associationRolesForm.get('roleName')?.invalid"
+            [disabled]="associationName.invalid"
             class="btn"
-            type="button"
+            type="submit"
           >
             Add
           </button>
