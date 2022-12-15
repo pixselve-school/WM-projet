@@ -4,6 +4,7 @@ import {
   Association,
   AssociationMember,
   AssociationsService,
+  Minute,
 } from '../associations.service';
 import { Role } from '../roles.service';
 import { DialogService } from '@ngneat/dialog';
@@ -17,6 +18,8 @@ import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.compon
 export class AssociationDetailComponent implements OnInit {
   association!: Association;
   roles!: Role[];
+
+  minutes: Minute[] = [];
   id: string = this.route.snapshot.paramMap.get('id') ?? '';
 
   loadingDelete = false;
@@ -52,21 +55,31 @@ export class AssociationDetailComponent implements OnInit {
     });
   }
 
+  localDate = new Intl.DateTimeFormat('fr-FR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  parseDate(date: string): string {
+    return this.localDate.format(new Date(date));
+  }
+
   async ngOnInit(): Promise<void> {
     try {
-      const association = await this.associationService
-        .getAssociation(parseInt(this.id))
-        .toPromise();
-
-      const roles = await this.associationService
-        .getRoles(parseInt(this.id))
-        .toPromise();
+      const [association, roles, minutes] = await Promise.all([
+        this.associationService.getAssociation(Number(this.id)).toPromise(),
+        this.associationService.getRoles(parseInt(this.id)).toPromise(),
+        this.associationService.getMinutes(parseInt(this.id)).toPromise(),
+      ]);
 
       if (association === undefined) throw new Error('Association not found');
       if (roles === undefined) throw new Error('Roles not found');
+      if (minutes === undefined) throw new Error('Minutes not found');
 
       this.association = association;
       this.roles = roles;
+      this.minutes = minutes;
     } catch (e) {
       this.router.navigate(['/associations']);
     }

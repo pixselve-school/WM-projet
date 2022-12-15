@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 import { Role } from './roles.service';
+import { User } from './users.service';
 
 export type Association = {
   id: number;
@@ -21,6 +22,14 @@ export type AssociationMember = {
 export type NewAssociation = {
   name: string;
   idUsers: number[];
+};
+
+export type Minute = {
+  id: number;
+  content: string;
+  date: string;
+  association: Association;
+  voters: User[];
 };
 
 @Injectable({
@@ -67,6 +76,12 @@ export class AssociationsService {
     return this.http.put<Association>(
       `${environment.backendUrl}/associations/${idAssociation}`,
       { idUsers }
+    );
+  }
+
+  getMinutes(id: number): Observable<Minute[]> {
+    return this.http.get<Minute[]>(
+      `${environment.backendUrl}/associations/${id}/minutes`
     );
   }
 }
