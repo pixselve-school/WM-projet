@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ApiHelperService } from '../api-helper.service';
 
 @Component({
@@ -15,38 +15,32 @@ export class UsersListComponent implements OnInit {
     age: string;
   }[] = [];
 
-  firstname = new FormControl('', [Validators.required]);
-  lastname = new FormControl('', [Validators.required]);
-  age = new FormControl('', [
-    Validators.required,
-    Validators.min(0),
-    Validators.max(150),
-  ]);
-  password = new FormControl('', [Validators.required]);
+  createUserForm = this.fb.group({
+    firstname: new FormControl('', [Validators.required]),
+    lastname: new FormControl('', [Validators.required]),
+    age: new FormControl('', [Validators.required, Validators.min(1)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required]),
+  });
+
   loadingCreate = false;
   errorCreate = '';
   modalOpen = false;
 
-  constructor(private api: ApiHelperService) {}
+  constructor(private api: ApiHelperService, private fb: FormBuilder) {}
 
   async addUser(event: SubmitEvent) {
     try {
       this.loadingCreate = true;
       this.errorCreate = '';
       event.preventDefault();
-      const user = {
-        firstname: this.firstname.value,
-        lastname: this.lastname.value,
-        age: this.age.value,
-        password: this.password.value,
-      };
-      await this.api.post({ endpoint: '/users', data: user });
+      await this.api.post({
+        endpoint: '/users',
+        data: this.createUserForm.value,
+      });
       this.dataSource = await this.api.get({ endpoint: '/users' });
       // clear form
-      this.firstname.setValue('');
-      this.lastname.setValue('');
-      this.age.setValue('');
-      this.password.setValue('');
+      this.createUserForm.reset();
       this.modalOpen = false; // close modal
     } catch (e) {
       this.errorCreate = 'Error while creating user';
