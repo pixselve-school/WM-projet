@@ -27,6 +27,7 @@ import { AssociationDetailComponent } from './association-detail/association-det
 import { SearchAssociationComponent } from './associations-list/search-association/search-association.component';
 import { EditRoleModalComponent } from './association-detail/edit-role-modal/edit-role-modal.component';
 import { NewMinuteDialogComponent } from './association-detail/new-minute-dialog/new-minute-dialog.component';
+import { AddUserModalComponent } from './association-detail/add-user-modal/add-user-modal.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { NewMinuteDialogComponent } from './association-detail/new-minute-dialog
     SearchAssociationComponent,
     EditRoleModalComponent,
     NewMinuteDialogComponent,
+    AddUserModalComponent,
   ],
   imports: [
     BrowserModule,

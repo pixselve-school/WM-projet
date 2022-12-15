@@ -1,0 +1,133 @@
+<div class="modal modal-open">
+  <form (submit)="save($event)" class="modal-box text-white">
+    <h3 class="text-lg font-bold">Add a member</h3>
+    <form (submit)="search($event)" class="space-y-4">
+      <div class="flex items-end space-x-2">
+        <div class="form-control w-full">
+          <label class="label">
+            <span class="label-text">User ID</span>
+          </label>
+          <input
+            [formControl]="userID"
+            class="input input-bordered w-full"
+            placeholder="1"
+            type="text"
+          />
+        </div>
+
+        <button
+          [disabled]="userID.invalid"
+          [ngClass]="{ loading: loading }"
+          class="btn"
+          type="button"
+        >
+          <svg
+            *ngIf="!loading"
+            class="h-5 w-5 fill-current"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M15.5,12C18,12 20,14 20,16.5C20,17.38 19.75,18.21 19.31,18.9L22.39,22L21,23.39L17.88,20.32C17.19,20.75 16.37,21 15.5,21C13,21 11,19 11,16.5C11,14 13,12 15.5,12M15.5,14A2.5,2.5 0 0,0 13,16.5A2.5,2.5 0 0,0 15.5,19A2.5,2.5 0 0,0 18,16.5A2.5,2.5 0 0,0 15.5,14M10,4A4,4 0 0,1 14,8C14,8.91 13.69,9.75 13.18,10.43C12.32,10.75 11.55,11.26 10.91,11.9L10,12A4,4 0 0,1 6,8A4,4 0 0,1 10,4M2,20V18C2,15.88 5.31,14.14 9.5,14C9.18,14.78 9,15.62 9,16.5C9,17.79 9.38,19 10,20H2Z"
+            />
+          </svg>
+        </button>
+      </div>
+      <ng-container *ngIf="searched">
+        <ng-container *ngIf="foundUser !== null; else notfound">
+          <div
+            *ngIf="!foundUserIsMember(); else alreadyMember"
+            class="alert alert-success shadow-lg"
+          >
+            <div>
+              <svg
+                class="stroke-current flex-shrink-0 h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+              <span
+                >User found: {{ foundUser.firstname }} {{ foundUser.lastname }}.
+                Click add to add it !</span
+              >
+            </div>
+          </div>
+          <ng-template #alreadyMember>
+            <div class="alert alert-warning shadow-lg">
+              <div>
+                <svg
+                  class="stroke-current flex-shrink-0 h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  />
+                </svg>
+                <span
+                  >Warning: {{ foundUser.firstname }}
+                  {{ foundUser.lastname }} is already a member.</span
+                >
+              </div>
+            </div>
+          </ng-template>
+        </ng-container>
+        <ng-template #notfound>
+          <div class="alert alert-error shadow-lg">
+            <div>
+              <svg
+                class="stroke-current flex-shrink-0 h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+              <span>User not found !</span>
+            </div>
+          </div>
+        </ng-template>
+      </ng-container>
+    </form>
+
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text">Role name</span>
+      </label>
+      <input
+        [formControl]="roleName"
+        class="input input-bordered w-full"
+        placeholder="Member"
+        type="text"
+      />
+    </div>
+
+    <div class="modal-action">
+      <button (click)="close()" class="btn" type="button">Cancel</button>
+      <button
+        [disabled]="
+          foundUser === null || foundUserIsMember() || roleName.invalid
+        "
+        class="btn btn-primary"
+        type="submit"
+      >
+        Add
+      </button>
+    </div>
+  </form>
+</div>

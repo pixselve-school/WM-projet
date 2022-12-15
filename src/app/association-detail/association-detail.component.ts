@@ -10,6 +10,7 @@ import { Role } from '../roles.service';
 import { DialogService } from '@ngneat/dialog';
 import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.component';
 import { NewMinuteDialogComponent } from './new-minute-dialog/new-minute-dialog.component';
+import { AddUserModalComponent } from './add-user-modal/add-user-modal.component';
 
 @Component({
   selector: 'app-association-detail',
@@ -53,6 +54,21 @@ export class AssociationDetailComponent implements OnInit {
         }
         return member;
       });
+    });
+  }
+
+  openAddUserModal() {
+    const dialogRef = this.dialog.open(AddUserModalComponent, {
+      // data is typed based on the passed generic
+      data: {
+        members: this.association.members,
+        idAssociation: this.association.id,
+      },
+    });
+
+    dialogRef.afterClosed$.subscribe((data) => {
+      if (data === null) return;
+      this.association = data;
     });
   }
 
