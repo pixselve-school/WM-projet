@@ -1,0 +1,19 @@
+<!-- The button to open modal -->
+<label class="btn" for="my-modal">open modal</label>
+
+<!-- Put this part before </body> tag -->
+<input class="modal-toggle" id="my-modal" type="checkbox" />
+<div class="modal">
+  <div class="modal-box relative">
+    <label class="btn btn-sm btn-circle absolute right-2 top-2" for="my-modal"
+      >✕</label
+    >
+    <h3 class="text-lg font-bold">Congratulations random Internet user!</h3>
+    <p class="py-4">
+      You've been selected for a chance to get one year of subscription to use
+      Wikipedia for free!
+    </p>
+  </div>
+</div>
+
+<button (click)="ref.close(true)">Close</button>

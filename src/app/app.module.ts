@@ -25,6 +25,7 @@ import { NewAssociationDialogComponent } from './associations-list/new-associati
 import { AssociationCardComponent } from './user-detail/association-card/association-card.component';
 import { AssociationDetailComponent } from './association-detail/association-detail.component';
 import { SearchAssociationComponent } from './associations-list/search-association/search-association.component';
+import { EditRoleModalComponent } from './association-detail/edit-role-modal/edit-role-modal.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { SearchAssociationComponent } from './associations-list/search-associati
     AssociationCardComponent,
     AssociationDetailComponent,
     SearchAssociationComponent,
+    EditRoleModalComponent,
   ],
   imports: [
     BrowserModule,
