@@ -37,4 +37,11 @@ export class RolesService {
     }
     return forkJoin(observables);
   }
+
+  editRole(role: CreateRole): Observable<Role> {
+    return this.http.put<Role>(
+      `${environment.backendUrl}/roles/${role.idUser}/${role.idAssociation}`,
+      { name: role.name }
+    );
+  }
 }

@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Association, AssociationsService } from '../associations.service';
+import {
+  Association,
+  AssociationMember,
+  AssociationsService,
+} from '../associations.service';
 import { Role } from '../roles.service';
+import { DialogService } from '@ngneat/dialog';
+import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.component';
 
 @Component({
   selector: 'app-association-detail',
@@ -17,11 +23,34 @@ export class AssociationDetailComponent implements OnInit {
 
   loadingRemoveMemberId: number | null = null;
 
+  private dialog = inject(DialogService);
+
   constructor(
     private route: ActivatedRoute,
     private associationService: AssociationsService,
     private router: Router
   ) {}
+
+  openEditRoleModal(member: AssociationMember) {
+    const dialogRef = this.dialog.open(EditRoleModalComponent, {
+      // data is typed based on the passed generic
+      data: {
+        username: member.firstname + ' ' + member.lastname,
+        role: member.role,
+        userId: member.id,
+        associationId: this.association.id,
+      },
+    });
+    dialogRef.afterClosed$.subscribe((data) => {
+      if (data === null) return;
+      this.association.members = this.association.members.map((member) => {
+        if (member.id === data.userId) {
+          member.role = data.name;
+        }
+        return member;
+      });
+    });
+  }
 
   async ngOnInit(): Promise<void> {
     try {
