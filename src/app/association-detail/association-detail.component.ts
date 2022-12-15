@@ -15,6 +15,8 @@ export class AssociationDetailComponent implements OnInit {
 
   loadingDelete = false;
 
+  loadingRemoveMemberId: number | null = null;
+
   constructor(
     private route: ActivatedRoute,
     private associationService: AssociationsService,
@@ -52,6 +54,30 @@ export class AssociationDetailComponent implements OnInit {
       alert('Error deleting association');
     } finally {
       this.loadingDelete = false;
+    }
+  }
+
+  /**
+   * Remove a member from the association
+   * @param id The id of the member to remove
+   * @returns A promise that resolves when the member has been removed
+   * @throws An error if the member could not be removed
+   */
+  async removeMember(id: number): Promise<void> {
+    try {
+      this.loadingRemoveMemberId = id;
+      const newMembers = this.association.members
+        .filter((member) => member.id !== id)
+        .map((member) => member.id);
+      const association = await this.associationService
+        .updateMembers(this.association.id, newMembers)
+        .toPromise();
+      if (association === undefined) throw new Error('Association not found');
+      this.association = association;
+    } catch (e) {
+      alert('Error removing member');
+    } finally {
+      this.loadingRemoveMemberId = null;
     }
   }
 }

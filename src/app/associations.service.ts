@@ -11,6 +11,7 @@ export type Association = {
 };
 
 export type AssociationMember = {
+  id: number;
   lastname: string;
   firstname: string;
   age: number;
@@ -56,6 +57,16 @@ export class AssociationsService {
   getRoles(id: number): Observable<Role[]> {
     return this.http.get<Role[]>(
       `${environment.backendUrl}/associations/${id}/roles`
+    );
+  }
+
+  updateMembers(
+    idAssociation: number,
+    idUsers: number[]
+  ): Observable<Association> {
+    return this.http.put<Association>(
+      `${environment.backendUrl}/associations/${idAssociation}`,
+      { idUsers }
     );
   }
 }

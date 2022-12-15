@@ -43,8 +43,9 @@
           </td>
           <td class="space-x-2">
             <div class="tooltip" data-tip="Remove the user">
-              <button class="btn btn-sm">
-                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
+              <button (click)="removeMember(member.id)" [disabled]="loadingRemoveMemberId !== null"
+                      [ngClass]="{'loading': loadingRemoveMemberId === member.id}" class="btn btn-sm">
+                <svg *ngIf="loadingRemoveMemberId !== member.id" class="h-4 w-4 fill-current" viewBox="0 0 24 24">
                   <path
                     d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
                   />
