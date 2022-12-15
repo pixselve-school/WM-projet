@@ -76,23 +76,28 @@
     </table>
   </div>
 
-  <h2 class="text-3xl font-bold">Minutes</h2>
+  <h2 class="text-3xl font-bold">
+    Minutes
+    <button (click)="openNewMinuteDialog()" class="btn btn-sm">New</button>
+  </h2>
 
-  <section class="grid grid-cols-3">
-    <div *ngFor="let minute of minutes" class="card w-96 bg-primary text-primary-content">
+  <section class="grid grid-cols-3 gap-2">
+    <div
+      *ngFor="let minute of minutes"
+      class="card w-96 bg-primary text-primary-content"
+    >
       <div class="card-body">
-        <h2 class="card-title">{{parseDate(minute.date)}}</h2>
-        <p>{{minute.content}}</p>
+        <h2 class="card-title">{{ parseDate(minute.date) }}</h2>
+        <p>{{ minute.content }}</p>
         <div>
           <h3 class="font-bold">Voters</h3>
           <div class="space-x-2">
-            <span *ngFor="let voter of minute.voters" class="badge">{{voter.firstname}} {{voter.lastname}}</span>
+            <span *ngFor="let voter of minute.voters" class="badge"
+            >{{ voter.firstname }} {{ voter.lastname }}</span
+            >
           </div>
-
         </div>
       </div>
     </div>
-
-
   </section>
 </div>

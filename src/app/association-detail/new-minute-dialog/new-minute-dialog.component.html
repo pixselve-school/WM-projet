@@ -1,0 +1,55 @@
+<div class="modal modal-open">
+  <form
+    (submit)="submit($event)"
+    [formGroup]="minuteForm"
+    class="modal-box text-white"
+  >
+    <h3 class="text-lg font-bold">Create a minute</h3>
+
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text">Date</span>
+      </label>
+      <input
+        class="input input-bordered w-full"
+        formControlName="date"
+        placeholder="Type here"
+        type="date"
+      />
+    </div>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Content</span>
+      </label>
+      <textarea
+        class="textarea textarea-bordered h-24"
+        formControlName="content"
+        placeholder="Content"
+      ></textarea>
+    </div>
+
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Voters</span>
+      </label>
+      <select class="select select-bordered" formControlName="voters" multiple>
+        <option disabled selected>Select voters</option>
+        <option *ngFor="let member of data.members" [ngValue]="member.id">
+          {{ member.firstname }} {{ member.lastname }}
+        </option>
+      </select>
+    </div>
+    <div class="modal-action">
+      <button (click)="close()" class="btn" type="button">Cancel</button>
+      <button
+        [disabled]="minuteForm.invalid || loading"
+        [ngClass]="{ loading: loading }"
+        class="btn btn-primary"
+        type="submit"
+      >
+        <ng-container *ngIf="!loading">Create</ng-container>
+      </button>
+    </div>
+  </form>
+</div>

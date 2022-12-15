@@ -9,6 +9,7 @@ import {
 import { Role } from '../roles.service';
 import { DialogService } from '@ngneat/dialog';
 import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.component';
+import { NewMinuteDialogComponent } from './new-minute-dialog/new-minute-dialog.component';
 
 @Component({
   selector: 'app-association-detail',
@@ -83,6 +84,21 @@ export class AssociationDetailComponent implements OnInit {
     } catch (e) {
       this.router.navigate(['/associations']);
     }
+  }
+
+  openNewMinuteDialog() {
+    const dialogRef = this.dialog.open(NewMinuteDialogComponent, {
+      // data is typed based on the passed generic
+      data: {
+        members: this.association.members,
+        idAssociation: this.association.id,
+      },
+    });
+
+    dialogRef.afterClosed$.subscribe((data) => {
+      if (data === null) return;
+      this.minutes = [data, ...this.minutes];
+    });
   }
 
   async deleteAssociation(): Promise<void> {

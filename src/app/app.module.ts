@@ -26,6 +26,7 @@ import { AssociationCardComponent } from './user-detail/association-card/associa
 import { AssociationDetailComponent } from './association-detail/association-detail.component';
 import { SearchAssociationComponent } from './associations-list/search-association/search-association.component';
 import { EditRoleModalComponent } from './association-detail/edit-role-modal/edit-role-modal.component';
+import { NewMinuteDialogComponent } from './association-detail/new-minute-dialog/new-minute-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { EditRoleModalComponent } from './association-detail/edit-role-modal/edi
     AssociationDetailComponent,
     SearchAssociationComponent,
     EditRoleModalComponent,
+    NewMinuteDialogComponent,
   ],
   imports: [
     BrowserModule,
