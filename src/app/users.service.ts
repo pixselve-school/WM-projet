@@ -11,6 +11,14 @@ export type User = {
   age: number;
 };
 
+export type EditUser = {
+  email?: string;
+  lastname?: string;
+  firstname?: string;
+  age?: number;
+  password?: string;
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -19,5 +27,9 @@ export class UsersService {
 
   getOneUser(id: number): Observable<User> {
     return this.http.get<User>(`${environment.backendUrl}/users/${id}`);
+  }
+
+  updateUser(id: number, user: EditUser): Observable<User> {
+    return this.http.put<User>(`${environment.backendUrl}/users/${id}`, user);
   }
 }

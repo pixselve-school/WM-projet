@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ApiHelperService } from '../api-helper.service';
+import { DialogService } from '@ngneat/dialog';
+import { NewUserModalComponent } from './new-user-modal/new-user-modal.component';
 
 @Component({
   selector: 'app-users-list',
@@ -15,39 +17,18 @@ export class UsersListComponent implements OnInit {
     age: string;
   }[] = [];
 
-  createUserForm = this.fb.group({
-    firstname: new FormControl('', [Validators.required]),
-    lastname: new FormControl('', [Validators.required]),
-    age: new FormControl('', [Validators.required, Validators.min(1)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
-  });
+  private dialog = inject(DialogService);
 
-  loadingCreate = false;
-  errorCreate = '';
-  modalOpen = false;
+  newUser() {
+    const newUserDialog = this.dialog.open(NewUserModalComponent);
+    newUserDialog.afterClosed$.subscribe((result) => {
+      if (result) {
+        this.dataSource.push(result);
+      }
+    });
+  }
 
   constructor(private api: ApiHelperService, private fb: FormBuilder) {}
-
-  async addUser(event: SubmitEvent) {
-    try {
-      this.loadingCreate = true;
-      this.errorCreate = '';
-      event.preventDefault();
-      await this.api.post({
-        endpoint: '/users',
-        data: this.createUserForm.value,
-      });
-      this.dataSource = await this.api.get({ endpoint: '/users' });
-      // clear form
-      this.createUserForm.reset();
-      this.modalOpen = false; // close modal
-    } catch (e) {
-      this.errorCreate = 'Error while creating user';
-    } finally {
-      this.loadingCreate = false;
-    }
-  }
 
   async ngOnInit(): Promise<void> {
     this.dataSource = await this.api.get({ endpoint: '/users' });
