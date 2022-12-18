@@ -8,6 +8,8 @@
           <span class="label-text">First name</span>
         </label>
         <input
+          [attr.data-cy]="'first-name'"
+          name="firstName"
           class="input input-bordered"
           formControlName="firstname"
           placeholder="Cody"
@@ -20,6 +22,8 @@
           <span class="label-text">Last name</span>
         </label>
         <input
+          [attr.data-cy]="'last-name'"
+          name="lastName"
           class="input input-bordered"
           formControlName="lastname"
           placeholder="Adam"
@@ -32,6 +36,8 @@
           <span class="label-text">Age</span>
         </label>
         <input
+          [attr.data-cy]="'age'"
+          name="age"
           class="input input-bordered"
           formControlName="age"
           placeholder="47"
@@ -44,6 +50,8 @@
           <span class="label-text">Email</span>
         </label>
         <input
+          [attr.data-cy]="'email'"
+          name="email"
           class="input input-bordered"
           formControlName="email"
           placeholder="cody.adam@etudiant.univ-rennes1.fr"
@@ -56,6 +64,8 @@
           <span class="label-text">Password</span>
         </label>
         <input
+          [attr.data-cy]="'password'"
+          name="password"
           class="input input-bordered"
           formControlName="password"
           placeholder="🤫Shhhhh"

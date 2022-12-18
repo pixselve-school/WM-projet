@@ -1,12 +1,14 @@
 <form (submit)="searchUser($event)" class="form-control space-y-2">
   <div class="input-group">
     <input
+      [attr.data.cy]="'search-user-input'"
       [formControl]="searchQuery"
       class="input input-bordered w-full"
       placeholder="Search with id…"
       type="text"
     />
     <button
+      [attr.data.cy]="'search-user-button'"
       [disabled]="searchQuery.invalid || loading"
       [ngClass]="{ loading: loading }"
       class="btn btn-square"

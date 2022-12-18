@@ -27,6 +27,7 @@
             <span class="label-text">Name</span>
           </label>
           <input
+            [attr.data-cy]="'association-name'"
             class="input input-bordered"
             formControlName="name"
             placeholder="Cody's great association"
@@ -37,6 +38,7 @@
         <div class="modal-action">
           <label class="btn" for="new-association-modal">Cancel</label>
           <button
+            [attr.data-cy]="'association-next'"
             [disabled]="associationBasicsForm.invalid"
             [ngClass]="{ loading: loadingCreate }"
             class="btn btn-primary"
@@ -59,6 +61,7 @@
               <span class="label-text">Role name</span>
             </label>
             <input
+              [attr.data-cy]="'association-role-name'"
               class="input input-bordered"
               [formControl]="associationName"
               placeholder="Cody's great association"
@@ -67,6 +70,7 @@
             />
           </form>
           <button
+            [attr.data-cy]="'association-add-role'"
             [disabled]="associationName.invalid"
             class="btn"
             type="submit"
@@ -83,7 +87,7 @@
             "
             class="badge badge-info gap-2"
           >
-            <button (click)="removeRole(i)" type="button">
+            <button (click)="removeRole(i)" [attr.data-cy]="'association-remove-role-' + i" type="button">
               <svg
                 class="inline-block w-4 h-4 stroke-current"
                 fill="none"
@@ -104,6 +108,7 @@
         <div class="modal-action">
           <label class="btn" for="new-association-modal">Cancel</label>
           <button
+            [attr.data-cy]="'association-next'"
             [disabled]="associationRolesForm.get('roles')?.invalid"
             [ngClass]="{ loading: loadingCreate }"
             class="btn btn-primary"
@@ -119,6 +124,7 @@
         <div class="flex items-end space-x-2">
           <div class="form-control flex-grow">
             <input
+              [attr.data-cy]="'association-member-id'"
               [formControl]="addMemberInput"
               [ngClass]="{ 'input-error': invalidMemberID }"
               class="input input-bordered input-xs"
@@ -128,6 +134,7 @@
             />
           </div>
           <button
+            [attr.data-cy]="'association-add-member'"
             [disabled]="addMemberInput.invalid"
             class="btn btn-xs"
             type="submit"
@@ -150,6 +157,7 @@
               <ng-container [formGroup]="member">
                 <td>
                   <button
+                    [attr.data-cy]="'association-remove-member-' + i"
                     (click)="removeMember(i)"
                     class="btn btn-circle btn-xs"
                   >
@@ -169,9 +177,12 @@
                     </svg>
                   </button>
                 </td>
-                <td>{{ member.value.name }}</td>
+                <td
+                  [attr.data-cy]="'association-member-name-' + i"
+                >{{ member.value.name }}</td>
                 <td>
                   <select
+                    [attr.data-cy]="'association-member-role-' + i"
                     class="select select-bordered select-xs w-full max-w-xs"
                     formControlName="role"
                   >
@@ -193,7 +204,10 @@
 
       <div class="modal-action">
         <label class="btn" for="new-association-modal">Cancel</label>
-        <button (click)="finishMembers()" class="btn btn-primary">Next</button>
+        <button
+          (click)="finishMembers()"
+          [attr.data-cy]="'association-finish'" class="btn btn-primary">Next
+        </button>
       </div>
     </div>
     <div *ngIf="step === 3">
@@ -209,12 +223,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let member of membersToUsers.controls; let i = index">
-                <td>{{ member.value.name }}</td>
-                <td>
-                  <div class="badge badge-primary">{{ member.value.role }}</div>
-                </td>
-              </tr>
+            <tr *ngFor="let member of membersToUsers.controls; let i = index">
+              <td
+                [attr.data-cy]="'association-member-name-' + i"
+              >{{ member.value.name }}</td>
+              <td>
+                <div
+                  [attr.data-cy]="'association-member-role-' + i"
+                  class="badge badge-primary">{{ member.value.role }}</div>
+              </td>
+            </tr>
             </tbody>
           </table>
         </div>
@@ -222,6 +240,7 @@
       <div class="modal-action">
         <label class="btn" for="new-association-modal">Cancel</label>
         <button
+          [attr.data-cy]="'association-create'"
           (click)="addAssociation()"
           [ngClass]="{ loading: loadingCreate }"
           class="btn btn-primary"
