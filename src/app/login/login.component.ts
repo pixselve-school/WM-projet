@@ -29,7 +29,10 @@ export class LoginComponent implements OnInit {
         endpoint: '/auth/login',
         data: { username: this.username.value, password: this.password.value },
       });
-      this.tokenStorageService.save(response.access_token);
+      this.tokenStorageService.save(
+        response.access_token,
+        +(this.username.value ?? '-1')
+      );
       if (!this.tokenStorageService.isLogged()) new Error('Not logged in');
       // redirect to /users
       await this.router.navigate(['/users']);
