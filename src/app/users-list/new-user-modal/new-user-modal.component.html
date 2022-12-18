@@ -1,0 +1,101 @@
+<div class="modal modal-open text-base-content">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Create a user</h3>
+
+    <form (submit)="addUser($event)" [formGroup]="createUserForm">
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">First name</span>
+        </label>
+        <input
+          class="input input-bordered"
+          formControlName="firstname"
+          placeholder="Cody"
+          required
+          type="text"
+        />
+      </div>
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Last name</span>
+        </label>
+        <input
+          class="input input-bordered"
+          formControlName="lastname"
+          placeholder="Adam"
+          required
+          type="text"
+        />
+      </div>
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Age</span>
+        </label>
+        <input
+          class="input input-bordered"
+          formControlName="age"
+          placeholder="47"
+          required
+          type="text"
+        />
+      </div>
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Email</span>
+        </label>
+        <input
+          class="input input-bordered"
+          formControlName="email"
+          placeholder="cody.adam@etudiant.univ-rennes1.fr"
+          required
+          type="email"
+        />
+      </div>
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Password</span>
+        </label>
+        <input
+          class="input input-bordered"
+          formControlName="password"
+          placeholder="🤫Shhhhh"
+          required
+          type="password"
+        />
+      </div>
+
+      <div
+        *ngIf="errorCreate.length > 0"
+        class="alert alert-error shadow-lg my-2"
+      >
+        <div>
+          <svg
+            class="stroke-current flex-shrink-0 h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+          <span>{{ errorCreate }}</span>
+        </div>
+      </div>
+
+      <div class="modal-action">
+        <button (click)="close()" class="btn" type="button">Cancel</button>
+        <button
+          [disabled]="createUserForm.invalid"
+          [ngClass]="{ loading: loadingCreate }"
+          class="btn btn-primary"
+        >
+          Create
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
