@@ -202,6 +202,10 @@ export class AssociationDetailComponent implements OnInit {
     }
   }
 
+  /**
+   * Remove an event from the association
+   * @param id The id of the event to remove
+   */
   async removeEvent(id: number): Promise<void> {
     try {
       this.loadingRemoveEventId = id;
