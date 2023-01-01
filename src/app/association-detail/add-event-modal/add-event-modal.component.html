@@ -1,0 +1,57 @@
+<div class="modal modal-open">
+  <form
+    (submit)="submit($event)"
+    [formGroup]="eventForm"
+    class="modal-box text-white"
+  >
+    <h3 class="text-lg font-bold">Create an event</h3>
+
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text">Event name</span>
+      </label>
+      <input
+        formControlName="name"
+        class="input input-bordered w-full"
+        placeholder="Wonderful party"
+        type="text"
+      />
+    </div>
+
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text">Start date & time :</span>
+      </label>
+      <input
+        class="input input-bordered w-full"
+        formControlName="start"
+        placeholder="Type here"
+        type="datetime-local"
+      />
+    </div>
+
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text">End date & time :</span>
+      </label>
+      <input
+        class="input input-bordered w-full"
+        formControlName="end"
+        placeholder="Type here"
+        type="datetime-local"
+      />
+    </div>
+
+    <div class="modal-action">
+      <button (click)="close()" class="btn" type="button">Cancel</button>
+      <button
+        [disabled]="eventForm.invalid || loading"
+        [ngClass]="{ loading: loading }"
+        class="btn btn-primary"
+        type="submit"
+      >
+        <ng-container *ngIf="!loading">Create</ng-container>
+      </button>
+    </div>
+  </form>
+</div>

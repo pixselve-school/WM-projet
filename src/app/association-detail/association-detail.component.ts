@@ -12,6 +12,7 @@ import { EditRoleModalComponent } from './edit-role-modal/edit-role-modal.compon
 import { NewMinuteDialogComponent } from './new-minute-dialog/new-minute-dialog.component';
 import { AddUserModalComponent } from './add-user-modal/add-user-modal.component';
 import { Event, EventsService } from '../events.service';
+import { AddEventModalComponent } from "./add-event-modal/add-event-modal.component";
 
 @Component({
   selector: 'app-association-detail',
@@ -87,6 +88,10 @@ export class AssociationDetailComponent implements OnInit {
     return this.localDate.format(new Date(date));
   }
 
+  sortEvents(){
+    this.events.sort(function(e1,e2){ return new Date(e2.start).getTime() - new Date(e1.start).getTime(); });
+  }
+
   getStatus(date: string, dateEnd: string): string {
     const eventDate = new Date(date);
     const now = new Date();
@@ -117,7 +122,7 @@ export class AssociationDetailComponent implements OnInit {
     const eventDate = new Date(date);
     const eventDateEnd = new Date(dateEnd);
     const diff = eventDateEnd.getTime() - eventDate.getTime();
-    const diffMinutes = Math.ceil(diff / (1000));
+    const diffMinutes = Math.ceil(diff / (1000 * 60));
     if(diffMinutes < 60) { return diffMinutes + " mins";}
     const diffHours = Math.ceil(diff / (1000 * 60 * 60));
     if(diffHours < 24) { return diffHours + " hours";}
@@ -143,7 +148,7 @@ export class AssociationDetailComponent implements OnInit {
       this.roles = roles;
       this.minutes = minutes;
       this.events = events;
-      this.events.sort(function(e1,e2){ return new Date(e2.start).getTime() - new Date(e1.start).getTime(); });
+      this.sortEvents();
     } catch (e) {
       this.router.navigate(['/associations']);
     }
@@ -222,17 +227,16 @@ export class AssociationDetailComponent implements OnInit {
   }
 
   openAddEventDialog() {
-    /*const dialogRef = this.dialog.open(NewMinuteDialogComponent, {
-      // data is typed based on the passed generic
+    const dialogRef = this.dialog.open(AddEventModalComponent, {
       data: {
-        members: this.association.members,
         idAssociation: this.association.id,
       },
     });
 
     dialogRef.afterClosed$.subscribe((data) => {
       if (data === null) return;
-      this.minutes = [data, ...this.minutes];
-    });*/
+      this.events = [data, ...this.events];
+      this.sortEvents();
+    });
   }
 }

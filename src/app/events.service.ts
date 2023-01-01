@@ -12,6 +12,13 @@ export type Event = {
   association: Association;
 };
 
+export type EventCreation = {
+  name: string;
+  start: string;
+  end: string;
+  association: number;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +33,9 @@ export class EventsService {
 
   deleteEvent(id: number) : Observable<Event> {
     return this.http.delete<Event>(`${environment.backendUrl}/events/${id}`);
+  }
+
+  createEvent(event: EventCreation) : Observable<Event> {
+    return this.http.post<Event>(`${environment.backendUrl}/events`, event);
   }
 }
