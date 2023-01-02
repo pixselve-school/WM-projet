@@ -102,4 +102,57 @@
       </div>
     </div>
   </section>
+
+  <h2 class="text-3xl font-bold">Events
+    <button (click)="openAddEventDialog()" class="btn btn-sm">Add</button>
+  </h2>
+
+  <div class="overflow-x-auto">
+    <table class="table w-full">
+      <!-- head -->
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Date Start</th>
+        <th>Duration</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let event of events">
+        <td>{{ event.name }}</td>
+        <td>
+          <div
+            class="badge"
+            [ngClass]="getEventBadge(event)"
+            >{{ getStatus(event.start.toString(), event.end.toString()) }}</div>
+        </td>
+        <td>{{ parseDate(event.start.toString()) }}</td>
+        <td>{{ getEventDuration(event.start.toString(), event.end.toString()) }}</td>
+        <td class="space-x-2">
+          <div class="tooltip" data-tip="Remove the event">
+            <button
+              (click)="removeEvent(event.id)"
+              [disabled]="loadingRemoveEventId !== null"
+              [ngClass]="{ loading: loadingRemoveEventId === event.id }"
+              class="btn btn-sm"
+            >
+              <svg
+                *ngIf="loadingRemoveEventId !== event.id"
+                class="h-4 w-4 fill-current"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                />
+              </svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>
