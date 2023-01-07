@@ -3,8 +3,6 @@ import { environment } from '../environments/environment';
 import { lastValueFrom, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-const base_url: string = 'http://localhost:80';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -71,7 +69,7 @@ export class ApiHelperService {
   }): Promise<any> {
     const methodWanted = method.toLowerCase();
 
-    const url = base_url + endpoint;
+    const url = environment.backendUrl + endpoint;
 
     const requestOptions = {
       params: queryParams,
