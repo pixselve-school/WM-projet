@@ -29,6 +29,8 @@ import { EditRoleModalComponent } from './association-detail/edit-role-modal/edi
 import { NewMinuteDialogComponent } from './association-detail/new-minute-dialog/new-minute-dialog.component';
 import { AddUserModalComponent } from './association-detail/add-user-modal/add-user-modal.component';
 import { NewUserModalComponent } from './users-list/new-user-modal/new-user-modal.component';
+import { AddEventModalComponent } from './association-detail/add-event-modal/add-event-modal.component';
+import { VerificationComponent } from './verification/verification.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { NewUserModalComponent } from './users-list/new-user-modal/new-user-moda
     NewMinuteDialogComponent,
     AddUserModalComponent,
     NewUserModalComponent,
+    AddEventModalComponent,
+    VerificationComponent,
   ],
   imports: [
     BrowserModule,
