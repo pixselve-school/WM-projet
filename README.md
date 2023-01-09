@@ -142,3 +142,106 @@ The form contains fields for the user's first name, last name, email address, ag
 > 
 > 🧰 Components :
 > - **main :** user-profile
+> - (1) logged-layout
+
+![User Profile](docs/user-profile.jpg)
+
+The user profile page displays information about the current user who is logged in. This information is presented in a form that allows the user to edit any of their data and save the changes by clicking on the "Update my profile" button.
+
+#### User Details :
+
+> 🚗 Routes :
+> - /users/:id
+> 
+> 🧰 Components :
+> - **main :** user-details
+> - (1) logged-layout
+> - (2) association-card
+
+![User Details](docs/user-detail.jpg)
+
+The user details page displays information about a specific user, including their first name, last name, and age. 
+The page also displays a list of all associations that the user is a member of. 
+Each association is displayed using an "association-card" component, which includes a button to view more details about the association on the association detail page.
+
+#### Associations Home :
+
+> 🚗 Routes :
+> - /associations
+> 
+> 🧰 Components :
+> - **main :** association-list
+> - (1) search-association
+> - (2) logged-layout
+> 
+> 📌 Dialogs :
+> - new-association-dialog
+
+![Assos List](docs/associations-list.jpg)
+
+The associations details page displays a list of all associations, along with specific information such as the name and list of members for each association. 
+You can click on the details button for each association to view more information on the association details page. 
+The page also includes a search bar component called "search-association" which allows you to search for an association using a specific ID. 
+Additionally, there is a "New association" button above the list that will open a dialog for creating a new association.
+
+#### Create Association Dialog :
+
+![Create User Modal](docs/new-asso.gif)
+
+The create association dialog is a component that is displayed in a dialog when the user clicks on the "New association" button on the associations list page.
+It contains a form divided into 4 steps for creating a new association.
+The form contains field for the association's name. 
+You can then add custom role. For the third step, you can add members by searching for their id. The final step is a recap.
+
+#### Association Details :
+
+> 🚗 Routes :
+> - /associations/:id
+>
+> 🧰 Components :
+> - **main :** association-detail
+> - (1) logged-layout
+>
+> 📌 Dialogs & Modals :
+> - add-event-modal
+> - add-user-modal
+> - add-role-modal
+> - new-minute-dialog
+
+![Asso Detail](docs/asso-detail.jpg)
+
+The association details page displays information about a specific association, including its name and lists of members, minutes, and events. 
+For each member, you have the option to edit their role or remove them from the association. 
+You can also view, remove, and add minutes using the "New" button, which will open the "new-minute-dialog" dialog. Similarly, you can view, remove, and add events using the "Add" button, which will open the "add-event-modal" modal.
+
+#### Add Event Modal :
+
+![Add Event Modal](docs/create-event.jpg)
+
+The add event modal is a component that is displayed in a modal when the user clicks on the "Add" button on the association details page.
+It contains a form for creating a new event.
+The form contains fields for the event's name, start and end date and time.
+
+#### Add User Modal :
+
+![Add User Modal](docs/add-member.jpg)
+
+The add user modal is a component that is displayed in a modal when the user clicks on the "Add" button on the association details page.
+It contains a search bar for searching for a user by ID.
+When the user is found, the form will display the user's first name, last name and its status : already in the association, not found, available to add.
+You can also specify the role of the new member.
+
+#### Add Role Modal :
+
+![Add Role Modal](docs/changerole.jpg)
+
+This modal displays a simple text input to change the role of a member.
+
+#### New Minute Dialog :
+
+![New Minute Dialog](docs/create-minute.jpg)
+
+The new minute dialog is a component that is displayed in a dialog when the user clicks on the "New" button on the association details page.
+It contains a form for creating a new minute.
+The form contains fields for the minute's content and date.
+You can also select voters members for the minute.
