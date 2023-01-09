@@ -75,13 +75,6 @@ export class ApiHelperService {
       params: queryParams,
     };
 
-    console.log(
-      method,
-      url,
-      JSON.stringify(requestOptions),
-      JSON.stringify(data)
-    );
-
     let req: Observable<any>;
     if (methodWanted === 'get') {
       req = this.http.get(url, { ...requestOptions, observe: 'response' });

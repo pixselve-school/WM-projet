@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       });
       this.tokenStorageService.save(
         response.access_token,
-        +(this.username.value ?? '-1')
+        (response.id ?? '-1')
       );
       if (!this.tokenStorageService.isLogged()) new Error('Not logged in');
       // redirect to /users
