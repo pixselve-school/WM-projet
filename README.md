@@ -1,27 +1,61 @@
-# FrAdministrationFront
+<h1 align="center">Association Manager Angular Front-end</h1>
+<h4 align="center">Mael KERICHARD (@Pixselve) - Romain BRIEND (@Yami2200)</h4>
+<p align="center">
+   <img src="https://img.shields.io/badge/-ESIR-orange" alt="ESIR">
+   <img src="https://img.shields.io/badge/-TypeScript-blue" alt="TypeScript">
+   <img src="https://img.shields.io/badge/-Angular-red" alt="NestJS">
+</p>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.9.
+---
 
-## Development server
+This project provides a web Front-end made with Angular for managing associations services provided by a [REST API](https://github.com/pixselve-school/tp1-wm). 
+The user interfaces provide all tools you need to interact with, edit and display data from the API.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## ✨ How to use
 
-## Code scaffolding
+We released a Docker image for anyone to use. It is available
+on [GitHub Packages](https://github.com/pixselve-school/tp1-wm/pkgs/container/tp1-wm).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+docker run -p 4200:4200 ghcr.io/pixselve-school/wm-projet:main
+```
 
-## Build
+Or use a `docker-compose.yml` file:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+You can find a complete docker compose file including the frontend and backend, a RabbitMQ instance, a PostgreSQL and a
+SMTP server in the [projet-al](https://github.com/pixselve-school/projet-al) repository. (REQUIRED for feature like : email verification)
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🧱 Build from source
 
-## Running end-to-end tests
+### Requirements
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Node.js
 
-## Further help
+### Installation
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+git clone
+cd wm-projet
+npm install
+```
+
+### Configuration
+
+The configuration is done through environment variables in the file src/environments/environment.ts. 
+
+### Development
+
+```bash
+npm run start
+```
+Navigate to `http://localhost:4200/`.
+
+### Building
+
+```bash
+npm run build
+```
+
+## 📕 Project Details:
+
