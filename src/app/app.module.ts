@@ -30,6 +30,7 @@ import { NewMinuteDialogComponent } from './association-detail/new-minute-dialog
 import { AddUserModalComponent } from './association-detail/add-user-modal/add-user-modal.component';
 import { NewUserModalComponent } from './users-list/new-user-modal/new-user-modal.component';
 import { AddEventModalComponent } from './association-detail/add-event-modal/add-event-modal.component';
+import { VerificationComponent } from './verification/verification.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { AddEventModalComponent } from './association-detail/add-event-modal/add
     AddUserModalComponent,
     NewUserModalComponent,
     AddEventModalComponent,
+    VerificationComponent,
   ],
   imports: [
     BrowserModule,

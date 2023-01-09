@@ -8,11 +8,16 @@ import { LoggedLayoutComponent } from './logged-layout/logged-layout.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { AssociationsListComponent } from './associations-list/associations-list.component';
 import { AssociationDetailComponent } from './association-detail/association-detail.component';
+import { VerificationComponent } from "./verification/verification.component";
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'verify',
+    component: VerificationComponent,
   },
   {
     path: '',

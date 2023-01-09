@@ -42,7 +42,10 @@ export class LoginComponent implements OnInit {
           this.snackBar.open('😖 Incorrect password', 'Close');
           return;
         } else if (e.status === 404) {
-          this.snackBar.open('😖 Incorrect username', 'Close');
+          this.snackBar.open('😖 Incorrect email', 'Close');
+          return;
+        } else if(e.status === 403) {
+          this.snackBar.open('😖 Your email is not verified', 'Close');
           return;
         }
       }
