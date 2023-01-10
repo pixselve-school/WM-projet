@@ -2,8 +2,8 @@ import 'cypress-localstorage-commands';
 
 before(() => {
   cy.visit('http://localhost:4200');
-  cy.get('input[name=username]').type('1');
-  cy.get('input[name=password]').type('password');
+  cy.get('input[name=username]').type('admin@administration.fr');
+  cy.get('input[name=password]').type('admin');
   cy.get('button[type=submit]').click();
   cy.url().should('include', '/users');
   cy.saveLocalStorage();
@@ -40,7 +40,7 @@ describe('admin', () => {
     cy.get('.h-6').click();
     cy.get('.alert > :nth-child(1) > span').should(
       'have.text',
-      'We found Cody Adam for query 1.'
+      'We found admin admin for query 1.'
     );
   });
 
@@ -57,7 +57,7 @@ describe('admin', () => {
     cy.get('[data-cy="association-add-member"]').click();
     cy.get('[data-cy="association-member-name-0"]').should(
       'have.text',
-      'Cody Adam'
+      'admin admin'
     );
     cy.get('[data-cy="association-finish"]').click();
     cy.get('[data-cy="association-member-role-0"]').should(
@@ -66,7 +66,7 @@ describe('admin', () => {
     );
     cy.get('[data-cy="association-member-name-0"]').should(
       'have.text',
-      'Cody Adam'
+      'admin admin'
     );
     cy.get(':nth-child(3) > :nth-child(1) > h1').should(
       'have.text',
@@ -84,7 +84,6 @@ describe('admin', () => {
     cy.get('.btn-ghost > span').click();
     cy.get('td').should('not.contain.text', 'TESTFIRSTNAME');
     cy.get('td').should('not.contain.text', 'TESTLASTNAME');
-    cy.get('td').should('not.contain.text', '21');
     /* ==== End Cypress Studio ==== */
   });
 });

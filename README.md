@@ -57,6 +57,19 @@ Navigate to `http://localhost:4200/`.
 npm run build
 ```
 
+### Running Tests
+
+```bash
+npx cypress run
+```
+
+Required : the app must be running on port 4200 and connected to backend.
+
+
+Expected Output :
+
+![Tests Good](docs/testgood.jpg)
+
 ## 📕 Project Details:
 
 ### 🏠 Architecture :
